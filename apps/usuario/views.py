@@ -42,32 +42,28 @@ class  UsuarioDelete(DeleteView):
     template_name = 'usuario/usuario_delete.html'
     success_url = reverse_lazy('usuario:usuario_listar')
     
+    
+    
+    
 class RolList(ListView):
     model = Rol
-    template_name = 'usuario/rol_list.htm'
+    template_name = 'rol/rol_list.html'
     
 class RolCreate(CreateView):
     model = Rol
-    template_name = 'usuario/rol_form.htm'
+    template_name = 'rol/rol_form.html'
     form_class = RolForm
     second_form_class = UsuarioForm
-    success_url = reverse_lazy('rol_listar')
+    success_url = reverse_lazy('usuario:rol_listar')
     
-    def get_context_data(self, **kwargs):
-        context = super(RolCreate, self).get_context_data(**kwargs)
-        if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
-        if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
-        return context
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        form = self.form_class(request.POST)
-        form2 = self.second_form_class(request.POST)
-        if form.is_valid() and form2.is_valid():
-            documento = form.save(commit=False)
-            documento.empleado = form2.save()
-            documento.save()
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.render_to_response(self.get_context_data(form=form, form2=form2))
+class RolUpdate(UpdateView):
+    model = Rol
+    form_class = RolForm
+    template_name = 'rol/rol_form.html'
+    success_url = reverse_lazy('usuario:rol_listar')
+    
+class  RolDelete(DeleteView):
+    model = Rol
+    form_class = RolForm
+    template_name = 'rol/rol_delete.html'
+    success_url = reverse_lazy('usuario:rol_listar')

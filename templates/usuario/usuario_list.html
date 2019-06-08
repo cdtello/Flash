@@ -16,6 +16,7 @@
             <td>Dirección</td>
             <td>Email</td>
             <td>Estado</td>
+            <td>Rol</td>
             <td>Acciones</td>
             
         </tr>
@@ -32,6 +33,7 @@
             <td>{{usuario.direccion}}</td>
             <td>{{usuario.email}}</td>
             <td>{{usuario.estado}}</td>
+            <td><b>{{usuario.rol.nombreRol}}<b></td>
             <td>
                 <a class = "btn btn-primary"  href = "{% url 'usuario:usuario_editar' usuario.identificacion %}">Editar</a>
                 <a class = "btn btn-danger"  href = "{% url 'usuario:usuario_eliminar' usuario.identificacion %}">Eliminar</a>

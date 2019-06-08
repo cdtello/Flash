@@ -17,6 +17,7 @@ class UsuarioForm(forms.ModelForm):
             'direccion', 
             'email', 
             'estado',
+            'rol',
         ]
         labels = {
             'identificacion'            : 'Identificación', 
@@ -28,17 +29,17 @@ class UsuarioForm(forms.ModelForm):
             'direccion'                 : 'Dirección', 
             'email'                     : 'Email', 
             'estado'                    : 'Estado',
+            'rol'                       : 'Rol',
         }
         widgets = {
             'identificacion'            : forms.TextInput(attrs={'class':'form-control'}), 
-            'contrasena'                : forms.TextInput(attrs={'class':'form-control'}),
+            'contrasena'                : forms.PasswordInput(attrs={'class':'form-control'}),
             'nombre'                    : forms.TextInput(attrs={'class':'form-control'}),
             'edad'                      : forms.TextInput(attrs={'class':'form-control'}),
             'telefono_movil'            : forms.TextInput(attrs={'class':'form-control'}), 
             'telefono_fijo'             : forms.TextInput(attrs={'class':'form-control'}),
             'direccion'                 : forms.TextInput(attrs={'class':'form-control'}), 
             'email'                     : forms.TextInput(attrs={'class':'form-control'}), 
-            'estado'                    : forms.TextInput(attrs={'class':'form-control'}),  
         }
 
 class RolForm(forms.ModelForm):

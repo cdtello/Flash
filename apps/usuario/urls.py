@@ -12,6 +12,8 @@ urlpatterns = [
     path('editar/<pk>', UsuarioUpdate.as_view(), name ='usuario_editar'),
     path('eliminar/<pk>', UsuarioDelete.as_view(), name ='usuario_eliminar'),
     
-    path('documento/listar', RolList.as_view(), name ='rol_listar'),
-    path('documento/nuevo', RolCreate.as_view(), name ='rol_crear'),
+    path('rol/nuevo', RolCreate.as_view(), name ='rol_crear'),
+    path('rol/listar', RolList.as_view(), name ='rol_listar'),
+    path('rol/editar/<pk>', RolUpdate.as_view(), name ='rol_editar'),
+    path('rol/eliminar/<pk>', RolDelete.as_view(), name ='rol_eliminar'),
 ]

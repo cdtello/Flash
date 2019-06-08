@@ -1,0 +1,39 @@
+{%extends 'base/base.html'%}
+{%block contenido%}
+
+<section class="ftco-section">
+    <div class="container">
+    <div class="row align-items-center">
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>ID Rol</td>
+            <td>Nombre Rol</td>
+            <td>Descripcion</td>
+            <td>Acciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        {%if object_list%}
+        {%for rol in object_list%}
+        <tr>
+            <td>{{rol.idRol}}</td>
+            <td>{{rol.nombreRol}}</td>
+            <td>{{rol.descripcion}}</td>
+            <td>
+                <a class = "btn btn-primary"  href = "{% url 'usuario:rol_editar' rol.idRol %}">Editar</a>
+                <a class = "btn btn-danger"  href = "{% url 'usuario:rol_eliminar' rol.idRol %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <h1> No hay registros de Usuarios </h1>
+        {% endif %}
+    </tbody>
+</table>
+
+</div>
+    </div>
+</section>
+{% endblock %}
