@@ -9,7 +9,7 @@ urlpatterns = [
     path('', index, name = 'index'),
     path('nuevo/', UsuarioCreate.as_view(), name ='usuario_crear'),
     path('listar/', UsuarioList.as_view(), name ='usuario_listar'),
-    path('editar/<pk>', UsuarioUpdate.as_view(), name ='usuario_editar'),
+    path('editar/<int:id_usuario>', UsuarioUpdate.as_view(), name ='usuario_editar'),
     path('eliminar/<int:id_usuario>', usuario_delete, name ='usuario_eliminar'),
     
     path('documento/listar', RolList.as_view(), name ='rol_listar'),

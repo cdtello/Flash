@@ -33,8 +33,8 @@
             <td>{{usuario.email}}</td>
             <td>{{usuario.estado}}</td>
             <td>
-                <a class = "btn btn-primary"  href = "{% url 'usuario_editar' usuario.identificacion %}">Editar</a>
-                <a class = "btn btn-danger"  href = "{% url 'usuario_eliminar' usuario.identificacion %}">Eliminar</a>
+                <a class = "btn btn-primary"  href = "{% url 'usuario:usuario_editar' usuario.identificacion %}">Editar</a>
+                <a class = "btn btn-danger"  href = "{% url 'usuario:usuario_eliminar' usuario.identificacion %}">Eliminar</a>
             </td>
         </tr>
         {% endfor %}
