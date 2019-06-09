@@ -1,6 +1,28 @@
 from django import forms
 from apps.usuario.models import Usuario,Rol
 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+
+class RegistroForm(UserCreationForm):
+    
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+             
+        ]
+        
+        labels = {
+            'username'      :   'Nombre de Usuario',
+            'first_name'    :   'Nombre',
+            'last_name'     :   'Apellidos',
+            'email'         :   'Correo',  
+        }
 
 class UsuarioForm(forms.ModelForm):
      
@@ -9,37 +31,17 @@ class UsuarioForm(forms.ModelForm):
          
         fields = [
             'identificacion', 
-            'contrasena',
-            'nombre',
-            'edad',
-            'telefono_movil', 
-            'telefono_fijo',
-            'direccion', 
-            'email', 
-            'estado',
+            'telefono', 
             'rol',
         ]
         labels = {
             'identificacion'            : 'Identificación', 
-            'contrasena'                : 'Contraseña',
-            'nombre'                    : 'Nombre',
-            'edad'                      : 'Edad',
-            'telefono_movil'            : 'Telefono Movil', 
-            'telefono_fijo'             : 'Telefono Fijo',
-            'direccion'                 : 'Dirección', 
-            'email'                     : 'Email', 
-            'estado'                    : 'Estado',
+            'telefono'                  : 'Telefono Movil', 
             'rol'                       : 'Rol',
         }
         widgets = {
             'identificacion'            : forms.TextInput(attrs={'class':'form-control'}), 
-            'contrasena'                : forms.PasswordInput(attrs={'class':'form-control'}),
-            'nombre'                    : forms.TextInput(attrs={'class':'form-control'}),
-            'edad'                      : forms.TextInput(attrs={'class':'form-control'}),
-            'telefono_movil'            : forms.TextInput(attrs={'class':'form-control'}), 
-            'telefono_fijo'             : forms.TextInput(attrs={'class':'form-control'}),
-            'direccion'                 : forms.TextInput(attrs={'class':'form-control'}), 
-            'email'                     : forms.TextInput(attrs={'class':'form-control'}), 
+            'telefono'                  : forms.TextInput(attrs={'class':'form-control'}), 
         }
 
 class RolForm(forms.ModelForm):
@@ -60,3 +62,5 @@ class RolForm(forms.ModelForm):
             'nombreRol'             :   forms.TextInput(attrs={'class':'form-control'}), 
             'descripcion'           :   forms.TextInput(attrs={'class':'form-control'}), 
         }
+        
+

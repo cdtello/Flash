@@ -44,21 +44,42 @@
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                {% if usuario.is_superuser %}
+                {% if user.is_superuser %}
                     {% include 'nav_super.html' %}
                 {% else %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Sedes</a>
-                        {% for dominio in tenants %}
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="{{dominio.domain}}">{{dominio.tenant.nombre}}</a>
-                            </div>
-                        {% endfor %}
+                           aria-haspopup="true" aria-expanded="false">Usuarios</a>
+                        <ul class="dropdown-menu">
+                            
+                                <a class="dropdown-item" href="{% url 'usuario:usuario_listar' %}">Listar</a>
+                            
+                                <a class="dropdown-item" href="{% url 'usuario:usuario_registrar' %}">Registrar</a>
+                            
+                        </ul>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Roles</a>
+                        
+                            <ul class="dropdown-menu">
+                            
+                                <a class="dropdown-item" href="{% url 'usuario:rol_listar' %}">Listar</a>
+                            
+                                <a class="dropdown-item" href="{% url 'usuario:rol_crear' %}">Registrar</a>
+                            
+                        </ul>
+                        
 
                     </li>
                     <li class="nav-item"><a href="#section-counter" class="nav-link">PQR</a></li>
-                    <li class="nav-item active"><a href="#" class="nav-link">Iniciar Sesión</a></li>
+                    {% if user.first_name == "" %}
+                        <li class="nav-item "><a href="#" class="nav-link">{{user.first_name}}</a></li>
+                    {% else %}
+                        <li class="nav-item "><a href="{% url 'usuario:login' %}" class="nav-link">Iniciar Sesión</a></li>
+                    {% endif %}
+                    <li class="nav-item "><a href="{% url 'usuario:logout' %}" class="nav-link">Salir</a></li>
                 {% endif %}
             </ul>
         </div>

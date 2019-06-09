@@ -7,18 +7,44 @@ from apps.usuario.forms import UsuarioForm, RolForm
 from apps.usuario.models import Usuario, Rol
 from django.shortcuts import render
 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from apps.usuario.forms import RegistroForm
+
 # Create your views here.
 
 def index(request):
     return render(request,'usuario/index.html')
 
-def usuario_delete(request, id_empleado):
-    empleado = Usuario.objects.get(identificacion = id_empleado)
-    if request.method == 'POST':
-        empleado.delete()
-        return redirect('usuario_listar')
-    return render(request, 'usuario/usuario_delete.html',{'usuario':empleado})
     
+
+class RegistroUsuario(CreateView):
+    model = User
+    template_name = 'usuario/registrar.html'
+    form_class = RegistroForm
+    second_form_class = UsuarioForm
+    success_url = reverse_lazy('usuario:usuario_listar')
+    
+    def get_context_data(self, **kwargs):
+        context = super(RegistroUsuario, self).get_context_data(**kwargs)
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
+        if 'form2' not in context:
+            context['form2'] = self.second_form_class(self.request.GET)
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        form2 = self.second_form_class(request.POST)
+        if form.is_valid() and form2.is_valid():
+            usuario = form2.save(commit=False)
+            usuario.user = form.save()
+            
+            usuario.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form, form2=form2))
 
 class UsuarioList(ListView):
     model = Usuario

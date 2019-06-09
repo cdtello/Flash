@@ -9,11 +9,10 @@
     <thead>
         <tr>
             <td>Identificación</td>
-            <td>Nombre</td>
-            <td>Edad</td>
-            <td>Telefono Movil</td>
-            <td>Telefono Fijo</td>
-            <td>Dirección</td>
+            <td>Nombres</td>
+            <td>Apellidos</td>
+            <td>Usuario</td>
+            <td>Telefono</td>
             <td>Email</td>
             <td>Estado</td>
             <td>Rol</td>
@@ -26,13 +25,12 @@
         {%for usuario in object_list%}
         <tr>
             <td>{{usuario.identificacion}}</td>
-            <td>{{usuario.nombre}}</td>
-            <td>{{usuario.edad}}</td>
-            <td>{{usuario.telefono_movil}}</td>
-            <td>{{usuario.telefono_fijo}}</td>
-            <td>{{usuario.direccion}}</td>
-            <td>{{usuario.email}}</td>
-            <td>{{usuario.estado}}</td>
+            <td>{{usuario.user.first_name}}</td>
+            <td>{{usuario.user.last_name}}</td>
+            <td>{{usuario.user.username}}</td>
+            <td>{{usuario.telefono}}</td>
+            <td>{{usuario.user.email}}</td>
+            <td>{{usuario.user.is_active}}</td>
             <td><b>{{usuario.rol.nombreRol}}<b></td>
             <td>
                 <a class = "btn btn-primary"  href = "{% url 'usuario:usuario_editar' usuario.identificacion %}">Editar</a>
