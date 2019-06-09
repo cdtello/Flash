@@ -44,9 +44,9 @@
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                {% if user.is_superuser %}
-                    {% include 'nav_super.html' %}
-                {% else %}
+                
+                    
+                
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Usuarios</a>
@@ -74,13 +74,13 @@
 
                     </li>
                     <li class="nav-item"><a href="#section-counter" class="nav-link">PQR</a></li>
-                    {% if user.first_name == "" %}
-                        <li class="nav-item "><a href="#" class="nav-link">{{user.first_name}}</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item active"><a href="#" class="nav-link">{{user.username}}</a></li>
                     {% else %}
                         <li class="nav-item "><a href="{% url 'usuario:login' %}" class="nav-link">Iniciar Sesión</a></li>
                     {% endif %}
                     <li class="nav-item "><a href="{% url 'usuario:logout' %}" class="nav-link">Salir</a></li>
-                {% endif %}
+                
             </ul>
         </div>
     </div>
